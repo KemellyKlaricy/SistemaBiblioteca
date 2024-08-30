@@ -16,9 +16,9 @@ public class Menu {
     ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 	
 	public static void pause() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner porra = new Scanner(System.in);
         System.out.println("\nPressione Enter:");
-        scanner.nextLine();
+        porra.nextLine();
     }
 	
 	public void OpcaoMenu(){
