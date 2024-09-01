@@ -8,37 +8,94 @@ public class EmprestimoService {
     Scanner entradaInt = new Scanner(System.in);
     Scanner entradaSt = new Scanner(System.in);
 
-    public void registroEmprestimo(ArrayList<User> listaUser, ArrayList<Livro> biblioteca, ArrayList<Emprestimo> emprestimos){
+    public boolean verificacaoEmprestimo(ArrayList<User> listaUser, String isbn, int id){
+        for(User user: listaUser){
+            if(user.ID == id){
+                for(int i = 0; i < 3; i++){
+                    if(user.historicoEmprestimo[i] != null){
+                        if(user.historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(isbn)){
+                            System.out.println("O emprestimo não pode ser comcluido," +
+                                    " pois o usuario já retem um livro com este ISBN!");
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
-        System.out.println("Informe o ISBN do livro para registrar o imprestimo: ");
-        String isbnaux = entradaSt.next();
+    public void registroEmprestimo(ArrayList<User> listaUser, ArrayList<Livro> biblioteca, ArrayList<Emprestimo> emprestimos) {
+        System.out.println("Informe o ISBN do livro para registrar o empréstimo: ");
+        String isbnaux = entradaSt.nextLine();
 
-        System.out.println("Informe o ID do usuário para registrar o imprestimo: ");
+        System.out.println("Informe o ID do usuário para registrar o empréstimo: ");
         int idaux = entradaInt.nextInt();
+        entradaSt.nextLine();
+
+
+        Livro livro = null;
+        User usuario = null;
+
+        for (Livro livro1 : biblioteca) {
+            if (livro1.isbn.equals(isbnaux)) {
+                livro = livro1;
+                break;
+            }
+        }
+
+        for (User user : listaUser) {
+            if (user.ID == idaux) {
+                usuario = user;
+                break;
+            }
+        }
+
+        if (livro == null) {
+            System.out.println("Livro não encontrado.");
+            return;
+        }
+
+        if (usuario == null) {
+            System.out.println("Usuário não encontrado.");
+            return;
+        }
+
+
+        if (livro.quantidadeDisponivel <= 0) {
+            System.out.println("Nenhum exemplar disponível.");
+            return;
+        }
+
+
+        if (!verificacaoEmprestimo(listaUser, isbnaux, idaux)) {
+            return;
+        }
 
         Emprestimo novoEmprestimo = new Emprestimo();
-        User aux = new User();
-        Livro auxl = new Livro();
-
-        for(User user: listaUser){
-            int idtemp = user.ID;
-            if(idtemp == idaux){
-                aux = user;
-            }
-        }
-        for(Livro livro: biblioteca){
-            String isbntemp = livro.isbn;
-            if(isbnaux.equals(isbntemp)){
-                auxl = livro;
-            }
-        }
-
-        novoEmprestimo.usuario = aux;
-        novoEmprestimo.livro = auxl;
+        novoEmprestimo.usuario = usuario;
+        novoEmprestimo.livro = livro;
         novoEmprestimo.dataEmprestimo = LocalDate.now();
         novoEmprestimo.dataDevolucao = LocalDate.now().plusMonths(1);
         novoEmprestimo.devolvido = false;
+
         emprestimos.add(novoEmprestimo);
+        livro.quantidadeDisponivel--;
+
+
+        for (User user : listaUser) {
+            if (user.ID == idaux) {
+                for (int i = 0; i < 3; i++) {
+                    if (user.historicoEmprestimo[i] == null) {
+                        user.historicoEmprestimo[i] = novoEmprestimo;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        System.out.println("Empréstimo registrado com sucesso!");
     }
 
     public void showEmprestimo(ArrayList<Emprestimo> emprestimos){
@@ -64,19 +121,28 @@ public class EmprestimoService {
 
     }
 
-    public void registroDevolucao(ArrayList<Emprestimo> emprestimos){
-        System.out.println("Informe o ID do usuario para registar a devolução: ");
+    public void registroDevolucao(ArrayList<Emprestimo> emprestimos) {
+        System.out.println("Informe o ID do usuário para registrar a devolução: ");
         int auxID = entradaInt.nextInt();
 
-        System.out.println("Informe o ISBN do livro para registar a devolução: ");
+        System.out.println("Informe o ISBN do livro para registrar a devolução: ");
         String auxISBN = entradaSt.nextLine();
 
-        for(Emprestimo auxEmprestimo: emprestimos){
-            if(auxEmprestimo.usuario.ID == auxID && auxEmprestimo.livro.isbn.equalsIgnoreCase(auxISBN)){
-                auxEmprestimo.devolvido = true;
-                showEmprestimo(emprestimos);
+        boolean encontrado = false;
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.usuario.ID == auxID && emprestimo.livro.isbn.equalsIgnoreCase(auxISBN)) {
+                emprestimo.devolvido = true;
+                emprestimo.livro.quantidadeDisponivel++;
+                System.out.println("Devolução registrada com sucesso!");
+                encontrado = true;
+                break;
             }
         }
+        if (!encontrado) {
+            System.out.println("Empréstimo não encontrado.");
+        }
     }
+
+
 
 }

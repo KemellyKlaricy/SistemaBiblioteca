@@ -9,6 +9,7 @@ public class User {
     String telefone = new String();
     int ID;
     int idade;
+    Emprestimo[] historicoEmprestimo = new Emprestimo[3];
 
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
