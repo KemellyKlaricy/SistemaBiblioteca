@@ -11,24 +11,24 @@ public class EmprestimoService {
     public void registroemprestimo(ArrayList<User> listaUser, ArrayList<Livro> biblioteca, ArrayList<Emprestimo> emprestimos){
 
         System.out.println("Informe o ISBN do livro para registrar o imprestimo: ");
-        String isbnaux = entradaSt.next();
+        String isbnAux = entradaSt.next();
 
         System.out.println("Informe o ID do usuário para registrar o imprestimo: ");
-        int idaux = entradaInt.nextInt();
+        int idAux = entradaInt.nextInt();
 
         Emprestimo novoEmprestimo = new Emprestimo();
         User aux = new User();
         Livro auxl = new Livro();
 
-        for(User user: listaUser){
-            int idtemp = user.ID;
-            if(idtemp == idaux){
+        for(User user: listaUser){        
+            int idTemp = user.ID;
+            if(idTemp == idAux){
                 aux = user;
             }
         }
         for(Livro livro: biblioteca){
-            String isbntemp = livro.isbn;
-            if(isbnaux.equals(isbntemp)){
+            String isbnTemp = livro.isbn;
+            if(isbnAux.equals(isbnTemp)){
                 auxl = livro;
             }
         }
