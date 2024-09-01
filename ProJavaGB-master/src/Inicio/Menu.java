@@ -16,9 +16,10 @@ public class Menu {
     ArrayList<Emprestimo> emprestimos = new ArrayList<>();
 	
 	public static void pause() {
-        Scanner porra = new Scanner(System.in);
-        System.out.println("\nPressione Enter:");
-        porra.nextLine();
+        try (Scanner sc = new Scanner(System.in)) {
+			System.out.println("\nPressione Enter:");
+			sc.nextLine();
+		}
     }
 	
 	public void OpcaoMenu(){
@@ -42,7 +43,7 @@ public class Menu {
 	
 	        case '1':
 	        	EmprestimoService emprestimoService = new EmprestimoService();
-	            emprestimoService.registroemprestimo(listaUser, biblioteca, emprestimos);
+	            emprestimoService.registroEmprestimo(listaUser, biblioteca, emprestimos);
 	            break;
 	
 	        case '2':
