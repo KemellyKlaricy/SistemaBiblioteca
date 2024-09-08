@@ -11,7 +11,6 @@ public class Livro {
 
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
-
     public void cadastroL() {
 
         System.out.println("Informe o Titulo do livro a ser registrado: ");

@@ -10,7 +10,7 @@ public class User {
     int ID;
     int idade;
     Emprestimo[] historicoEmprestimo = new Emprestimo[3];
-
+    User(){}
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
 
@@ -112,5 +112,13 @@ public class User {
         telefone = null;
         ID = 0;
         idade = 0;
+    }
+
+    public void devolverLivro(String isbn){
+        for(int i = 0; i < 3; i++){
+            if(historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(isbn)){
+                historicoEmprestimo[i] = null;
+            }
+        }
     }
 }

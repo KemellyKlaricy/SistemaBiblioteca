@@ -25,21 +25,133 @@ public class Menu {
 		sc.nextLine();
 	}
 
+	public void menuEmprestimo(){
+		System.out.println("");
+		char escolha;
+		do {
+			System.out.println("Escolha uma das opções a seguir:\n" +
+					"1 - Registrar empréstimo.\n" +
+					"2 - Registrar devolução.\n" +
+					"3 - Acessar empréstimo. \n" +
+					"0 - Retornar.");
+
+			System.out.print("Digite sua escolha: ");
+			String input = sc.nextLine();
+		if (input.length() > 0) {
+			escolha = input.charAt(0);
+		} else {
+			escolha = ' ';
+		}
+		switch (escolha) {
+			case '1':
+				emprestimoService.registroEmprestimo(listaUser, biblioteca, emprestimos);
+				break;
+			case '2':
+				emprestimoService.registroDevolucao(emprestimos);
+				break;
+			case '3':
+				emprestimoService.verEmprestimo(emprestimos);
+				break;
+			case '0':
+				break;
+			default:
+				System.out.println("Opção inválida. Tente novamente.");
+				break;
+		}
+	} while (escolha != '0');
+
+	}
+
+	public void menuLivro(){
+		System.out.println("");
+		char escolha;
+		do {
+			System.out.println("Escolha uma das opções a seguir:\n" +
+					"1 - Cadastrar livro.\n" +
+					"2 - Retirar livro da biblioteca.\n" +
+					"3 - Acessar livro. \n" +
+					"4 - Editar livro. \n" +
+					"0 - Retornar.");
+
+			System.out.print("Digite sua escolha: ");
+			String input = sc.nextLine();
+			if (input.length() > 0) {
+				escolha = input.charAt(0);
+			} else {
+				escolha = ' ';
+			}
+			switch (escolha) {
+				case '1':
+					livroService.cadastroLivro(biblioteca);
+					break;
+				case '2':
+					livroService.excluirLivro(biblioteca);
+					break;
+				case '3':
+					livroService.visualizarLivro(biblioteca);
+					break;
+				case '4':
+					livroService.editarLivro(biblioteca);
+					break;
+				case '0':
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+					break;
+			}
+		} while (escolha != '0');
+	}
+
+	public void menuUsuario(){
+		char escolha;
+		System.out.println("");
+		do {
+			System.out.println("Escolha uma das opções a seguir:\n" +
+					"1 - Cadastrar usuário.\n" +
+					"2 - Desvincular usuário.\n" +
+					"3 - Acessar dados do usuário. \n" +
+					"4 - Editar uduário. \n" +
+					"0 - Retornar.");
+
+			System.out.print("Digite sua escolha: ");
+			String input = sc.nextLine();
+			if (input.length() > 0) {
+				escolha = input.charAt(0);
+			} else {
+				escolha = ' ';
+			}
+			switch (escolha) {
+				case '1':
+					userService.cadastroUser(listaUser);
+					break;
+				case '2':
+					userService.excluirUser(listaUser);
+					break;
+				case '3':
+					userService.visualizarUser(listaUser);
+					break;
+				case '4':
+					userService.editarUser(listaUser);
+					break;
+				case '0':
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+					break;
+			}
+		} while (escolha != '0');
+	}
+
+
 	public void OpcaoMenu() {
 		System.out.println("====== Menu Inicial =====");
 
 		char escolha;
 		do {
 			System.out.println("Escolha uma das opções a seguir:\n" +
-					"1 - Registrar empréstimo.\n" +
-					"2 - Cadastrar Livro.\n" +
-					"3 - Apagar Livro \n" +
-					"4 - Editar Livro \n" +
-					"5 - Visualizar Livro \n" +
-					"6 - Cadastrar Usuário\n"+
-					"7 - Editar Usuário\n"+
-					"8 - Excluir Usuário \n"+
-					"9 - Visualizar Usuário\n" +
+					"1 - Analisar empréstimo.\n" +
+					"2 - Analisar biblioteca.\n" +
+					"3 - Analisar usuários\n" +
 					"0 - Sair");
 
 			System.out.print("Digite sua escolha: ");
@@ -53,31 +165,13 @@ public class Menu {
 
 			switch (escolha) {
 				case '1':
-					emprestimoService.registroEmprestimo(listaUser, biblioteca, emprestimos);
+					menuEmprestimo();
 					break;
 				case '2':
-					livroService.cadastroLivro(biblioteca);
+					menuLivro();
 					break;
 				case '3':
-					livroService.excluirLivro(biblioteca);
-					break;
-				case '4':
-					livroService.editarLivro(biblioteca);
-					break;
-				case '5':
-					livroService.visualizarLivro(biblioteca);
-					break;
-				case '6':
-					userService.cadastroUser(listaUser);
-					break;
-				case '7':
-					userService.editarUser(listaUser);
-					break;
-				case '8':
-					userService.excluirUser(listaUser);
-					break;
-				case '9':
-					userService.visualizarUser(listaUser);
+					menuUsuario();
 					break;
 				case '0':
 					System.out.println("Saindo...");

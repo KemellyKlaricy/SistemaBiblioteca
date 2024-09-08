@@ -98,7 +98,7 @@ public class EmprestimoService {
         System.out.println("Empréstimo registrado com sucesso!");
     }
 
-    public void showEmprestimo(ArrayList<Emprestimo> emprestimos){
+    public void verEmprestimo(ArrayList<Emprestimo> emprestimos){
         String status;
         System.out.println("Informe o ID do usuario para verificar o status de emprestimo: ");
         int auxID = entradaInt.nextInt();
@@ -135,6 +135,7 @@ public class EmprestimoService {
                 emprestimo.livro.quantidadeDisponivel++;
                 System.out.println("Devolução registrada com sucesso!");
                 encontrado = true;
+                emprestimo.usuario.devolverLivro(auxISBN);
                 break;
             }
         }
