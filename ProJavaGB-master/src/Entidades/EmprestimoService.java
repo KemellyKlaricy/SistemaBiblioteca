@@ -115,7 +115,7 @@ public class EmprestimoService {
                 }
                 System.out.println("Nome: " + auxEmprestimo.usuario.nome + "\nLivro: " + auxEmprestimo.livro.titulo
                         + "\nData de emprestimo: " + auxEmprestimo.dataEmprestimo + "\nData de devolução: "
-                        + auxEmprestimo.dataDevolucao + "Status: " + status);
+                        + auxEmprestimo.dataDevolucao + "\nStatus: " + status);
             }
         }
 
@@ -143,7 +143,4 @@ public class EmprestimoService {
             System.out.println("Empréstimo não encontrado.");
         }
     }
-
-
-
 }

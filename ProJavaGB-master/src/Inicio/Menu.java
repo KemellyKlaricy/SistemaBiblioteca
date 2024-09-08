@@ -58,6 +58,7 @@ public class Menu {
 				System.out.println("Opção inválida. Tente novamente.");
 				break;
 		}
+		pause();
 	} while (escolha != '0');
 
 	}
@@ -99,6 +100,7 @@ public class Menu {
 					System.out.println("Opção inválida. Tente novamente.");
 					break;
 			}
+			pause();
 		} while (escolha != '0');
 	}
 
@@ -139,9 +141,9 @@ public class Menu {
 					System.out.println("Opção inválida. Tente novamente.");
 					break;
 			}
+			pause();
 		} while (escolha != '0');
 	}
-
 
 	public void OpcaoMenu() {
 		System.out.println("====== Menu Inicial =====");
@@ -178,9 +180,9 @@ public class Menu {
 					break;
 				default:
 					System.out.println("Opção inválida. Tente novamente.");
+					pause();
 					break;
 			}
-			pause();
 		} while (escolha != '0');
 	}
 }
