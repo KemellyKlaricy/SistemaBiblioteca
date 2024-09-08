@@ -10,7 +10,6 @@ public class User {
     int ID;
     int idade;
     Emprestimo[] historicoEmprestimo = new Emprestimo[3];
-    User(){}
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
 
