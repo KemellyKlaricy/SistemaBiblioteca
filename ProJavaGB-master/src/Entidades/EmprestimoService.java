@@ -14,7 +14,7 @@ public class EmprestimoService {
                 for(int i = 0; i < 3; i++){
                     if(user.historicoEmprestimo[i] != null){
                         if(user.historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(isbn)){
-                            System.out.println("O emprestimo não pode ser comcluido," +
+                            System.out.println("O emprestimo não pode ser concluido," +
                                     " pois o usuario já retem um livro com este ISBN!");
                             return false;
                         }
@@ -70,6 +70,21 @@ public class EmprestimoService {
 
         if (!verificacaoEmprestimo(listaUser, isbnaux, idaux)) {
             return;
+        }
+
+        for(User aux: listaUser){
+            int cont = 0;
+            if(aux.ID == idaux){
+                for(int i = 0; i < 3; i++){
+                    if(aux.historicoEmprestimo[i] != null){
+                        cont++;
+                    }
+                    if(cont == 3){
+                        System.out.println("O usuário atingiu o limite de empréstimos!");
+                        return;
+                    }
+                }
+            }
         }
 
         Emprestimo novoEmprestimo = new Emprestimo();
@@ -135,7 +150,13 @@ public class EmprestimoService {
                 emprestimo.livro.quantidadeDisponivel++;
                 System.out.println("Devolução registrada com sucesso!");
                 encontrado = true;
-                emprestimo.usuario.devolverLivro(auxISBN);
+                for(int i = 0; i < 3; i++){
+                    if(emprestimo.usuario.historicoEmprestimo[i] != null){
+                        if(emprestimo.usuario.historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(auxISBN)){
+                            emprestimo.usuario.historicoEmprestimo[i] = null;
+                        }
+                    }
+                }
                 break;
             }
         }

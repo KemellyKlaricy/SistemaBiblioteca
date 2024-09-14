@@ -71,7 +71,6 @@ public class Menu {
 					"1 - Cadastrar livro.\n" +
 					"2 - Retirar livro da biblioteca.\n" +
 					"3 - Acessar livro. \n" +
-					"4 - Editar livro. \n" +
 					"0 - Retornar.");
 
 			System.out.print("Digite sua escolha: ");
@@ -91,9 +90,6 @@ public class Menu {
 				case '3':
 					livroService.visualizarLivro(biblioteca);
 					break;
-				case '4':
-					livroService.editarLivro(biblioteca);
-					break;
 				case '0':
 					break;
 				default:
@@ -112,7 +108,6 @@ public class Menu {
 					"1 - Cadastrar usuário.\n" +
 					"2 - Desvincular usuário.\n" +
 					"3 - Acessar dados do usuário. \n" +
-					"4 - Editar uduário. \n" +
 					"0 - Retornar.");
 
 			System.out.print("Digite sua escolha: ");
@@ -131,9 +126,6 @@ public class Menu {
 					break;
 				case '3':
 					userService.visualizarUser(listaUser);
-					break;
-				case '4':
-					userService.editarUser(listaUser);
 					break;
 				case '0':
 					break;

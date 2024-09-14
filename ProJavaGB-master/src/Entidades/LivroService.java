@@ -12,18 +12,6 @@ public class LivroService {
         biblioteca.add(livro);
     }
     
-    public void editarLivro(ArrayList<Livro> biblioteca){
-        System.out.println("Informe o ISBN do livro que deseja editadar: ");
-        String idTemp = entradaSt.nextLine();
-        
-        for(Livro book: biblioteca){
-            String idAux = book.isbn;
-            if(idAux.equals(idTemp)){
-                book.editarL();
-            }
-        }
-    }
-    
     public void excluirLivro(ArrayList<Livro> biblioteca){
         System.out.println("Informe o ISBN do livro que deseja deletar: ");
         String idTemp = entradaSt.nextLine();
@@ -31,9 +19,11 @@ public class LivroService {
         for(Livro book: biblioteca){
             String idAux = book.isbn;
             if(idAux.equals(idTemp)){
-                book.excluirL();
+                biblioteca.remove(book);
+                return;
             }
         }
+        System.out.println("Livro não encontrado!");
     }
     
     public void visualizarLivro(ArrayList<Livro> biblioteca){
@@ -48,7 +38,9 @@ public class LivroService {
                         "Editora: %s\n" +
                         "Ano: %d\n" +
                         "Estoque: %d",book.titulo,book.autor,book.isbn,book.editora,book.anoPublicacao,book.quantidadeDisponivel);
+                return;
             }
         }
+        System.out.println("Livro não encontrado!");
     }
 }

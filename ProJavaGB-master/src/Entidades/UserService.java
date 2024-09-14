@@ -11,26 +11,18 @@ public class UserService {
         novoUser.registroU();
         listaUser.add(novoUser);
     }
-    public void editarUser(ArrayList<User> listaUser){
-        System.out.println("Informe o ID do usuário que deseja editadar: ");
-        int idTemp = entradaInt.nextInt();
-        for(User user: listaUser){
-            int idAux = user.ID;
-            if(idAux == idTemp){
-                user.editarU();
-
-            }
-        }
-    }
     public void excluirUser(ArrayList<User> listaUser){
         System.out.println("Informe o ID do usuário que deseja editadar: ");
         int idTemp = entradaInt.nextInt();
         for(User user: listaUser){
             int idAux = user.ID;
             if(idAux == idTemp){
-                user.excluirU();
+                listaUser.remove(user);
+                System.out.println("Usuário desvinculado!");
+                return;
             }
         }
+        System.out.println("Usuário não encontrado!");
     }
     public void visualizarUser(ArrayList<User> listaUser){
         System.out.println("Informe o ID do usuário que deseja visualizar: ");
@@ -44,7 +36,25 @@ public class UserService {
                        "Telefone: %s\n" +
                        "Email: %s\n" +
                        "Endereço: %s", user.nome, user.idade, user.ID, user.telefone, user.email, user.endereco);
+               String status;
+               System.out.println("\nEmprestimos Registrados.");
+               for(int i = 0; i < 3; i++){
+
+                   if(user.historicoEmprestimo[i] != null){
+                       if(user.historicoEmprestimo[i].devolvido == true){
+                           status = "Devolvido";
+                       }else{
+                           status = "Encaminhado";
+                       }
+                       System.out.println("*****************************************");
+                       System.out.println("Nome: " + user.historicoEmprestimo[i].usuario.nome + "\nLivro: " + user.historicoEmprestimo[i].livro.titulo
+                               + "\nData de emprestimo: " + user.historicoEmprestimo[i].dataEmprestimo + "\nData de devolução: "
+                               + user.historicoEmprestimo[i].dataDevolucao + "\nStatus: " + status);
+                   }
+               }
+               return;
            }
         }
+        System.out.println("Usuário não encontrado!");
     }
 }
