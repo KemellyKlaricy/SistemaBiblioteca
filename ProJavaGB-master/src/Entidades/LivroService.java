@@ -5,10 +5,31 @@ import java.util.Scanner;
 public class LivroService {
 	
     Scanner entradaSt = new Scanner(System.in);
-
+    Scanner entradaInt = new Scanner(System.in);
     public void cadastroLivro(ArrayList<Livro> biblioteca){
-        Livro livro = new Livro();
-        livro.cadastroL();
+
+        System.out.println("Informe o Titulo do livro a ser registrado: ");
+        String titulo = entradaSt.nextLine();
+
+        System.out.println("Informe o gênero do livro: ");
+        String gereno = entradaSt.nextLine();
+
+        System.out.println("Informe o nome do Autor: ");
+        String autor = entradaSt.nextLine();
+
+        System.out.println("Informe a Editora: ");
+        String editora = entradaSt.nextLine();
+
+        System.out.println("Informe o ISBN: xxx-xx-xxx-xxxx-x");
+        String isbn = entradaSt.nextLine();
+
+        System.out.println("Informe o Ano de publicação: ");
+        int anoPublicacao = entradaInt.nextInt();
+
+        System.out.println("Informe a quantidade de Exemplares deisponiveis: ");
+        int quantidadeDisponivel = entradaInt.nextInt();
+
+        Livro livro = new Livro(titulo, autor,editora,isbn,gereno,anoPublicacao,quantidadeDisponivel);
         biblioteca.add(livro);
     }
     
@@ -27,17 +48,21 @@ public class LivroService {
     }
     
     public void visualizarLivro(ArrayList<Livro> biblioteca){
-        System.out.println("Informe o ID do usuário que deseja visualizar: ");
+        System.out.println("Informe o ISBN do livro que deseja visualizar: ");
         String idTemp = entradaSt.nextLine();
+        System.out.println(" ");
         for(Livro book: biblioteca){
             String idAux = book.isbn;
             if(idAux.equals(idTemp)){
+                System.out.println("_______________________________________________");
                 System.out.printf("Titulo: %s\n" +
                         "Autor: %s\n" +
                         "ISBN: %s\n" +
+                        "Gêmero: %s\n" +
                         "Editora: %s\n" +
                         "Ano: %d\n" +
-                        "Estoque: %d",book.titulo,book.autor,book.isbn,book.editora,book.anoPublicacao,book.quantidadeDisponivel);
+                        "Estoque: %d",book.titulo,book.autor,book.isbn,book.genero,book.editora,book.anoPublicacao,book.quantidadeDisponivel);
+                System.out.println("_______________________________________________");
                 return;
             }
         }

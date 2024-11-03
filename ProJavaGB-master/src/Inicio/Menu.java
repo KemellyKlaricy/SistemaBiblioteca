@@ -10,7 +10,9 @@ import Entidades.User;
 import Entidades.UserService;
 
 public class Menu {
+
 	private Scanner sc = new Scanner(System.in);
+
 	private ArrayList<User> listaUser = new ArrayList<>();
 	private ArrayList<Livro> biblioteca = new ArrayList<>();
 	private ArrayList<Emprestimo> emprestimos = new ArrayList<>();
@@ -138,6 +140,13 @@ public class Menu {
 	}
 
 	public void OpcaoMenu() {
+		Livro l1 = new Livro("O desaparecimento de Alice Norman", "Ólavo Meia-lua", "TS Livros",
+				"157-24-854-4152-8","Mistério | Drama", 2018, 14);
+		Livro l2 = new Livro("Os quatro filhos", "Larissa de Oliveira", "TS Livros",
+				"178-24-157-5893-7","Horror | Drama | Sobrenatural", 2005, 8);
+		biblioteca.add(l1);
+		biblioteca.add(l2);
+
 		System.out.println("====== Menu Inicial =====");
 
 		char escolha;
