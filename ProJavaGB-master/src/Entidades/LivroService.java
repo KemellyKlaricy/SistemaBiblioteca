@@ -2,11 +2,11 @@ package Entidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LivroService {
+public class LivroService extends Service{
 	
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
-    public void cadastroLivro(ArrayList<Livro> biblioteca){
+    public void cadastro(ArrayList<Livro> biblioteca){
 
         System.out.println("Informe o Titulo do livro a ser registrado: ");
         String titulo = entradaSt.nextLine();
@@ -46,8 +46,9 @@ public class LivroService {
         }
         System.out.println("Livro não encontrado!");
     }
-    
-    public void visualizarLivro(ArrayList<Livro> biblioteca){
+
+
+    public void visualizar(ArrayList<Livro> biblioteca){
         System.out.println("Informe o ISBN do livro que deseja visualizar: ");
         String idTemp = entradaSt.nextLine();
         System.out.println(" ");
@@ -62,7 +63,7 @@ public class LivroService {
                         "Editora: %s\n" +
                         "Ano: %d\n" +
                         "Estoque: %d",book.titulo,book.autor,book.isbn,book.genero,book.editora,book.anoPublicacao,book.quantidadeDisponivel);
-                System.out.println("_______________________________________________");
+                System.out.println("\n_______________________________________________");
                 return;
             }
         }

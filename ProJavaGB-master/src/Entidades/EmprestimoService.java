@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
-public class EmprestimoService {
+public class EmprestimoService extends Service {
     Scanner entradaInt = new Scanner(System.in);
     Scanner entradaSt = new Scanner(System.in);
 
-    public boolean verificacaoEmprestimo(ArrayList<User> listaUser, String isbn, int id){
+
+    public boolean verificacao(ArrayList<User> listaUser, String isbn, int id){
         for(User user: listaUser){
             if(user.ID == id){
                 for(int i = 0; i < 3; i++){
@@ -68,7 +69,7 @@ public class EmprestimoService {
         }
 
 
-        if (!verificacaoEmprestimo(listaUser, isbnaux, idaux)) {
+        if (!verificacao(listaUser, isbnaux, idaux)) {
             return;
         }
 
@@ -113,7 +114,7 @@ public class EmprestimoService {
         System.out.println("Empréstimo registrado com sucesso!");
     }
 
-    public void verEmprestimo(ArrayList<Emprestimo> emprestimos){
+    public void visualizar(ArrayList<Emprestimo> emprestimos){
         String status;
         System.out.println("Informe o ID do usuario para verificar o status de emprestimo: ");
         int auxID = entradaInt.nextInt();

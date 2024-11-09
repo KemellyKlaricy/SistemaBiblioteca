@@ -2,14 +2,9 @@ package Inicio;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Entidades.Emprestimo;
-import Entidades.EmprestimoService;
-import Entidades.Livro;
-import Entidades.LivroService;
-import Entidades.User;
-import Entidades.UserService;
+import Entidades.*;
 
-public class Menu {
+public class Bibliotecario implements Menu {
 
 	private Scanner sc = new Scanner(System.in);
 
@@ -27,6 +22,7 @@ public class Menu {
 		sc.nextLine();
 	}
 
+	@Override
 	public void menuEmprestimo(){
 		System.out.println("");
 		char escolha;
@@ -52,7 +48,7 @@ public class Menu {
 				emprestimoService.registroDevolucao(emprestimos);
 				break;
 			case '3':
-				emprestimoService.verEmprestimo(emprestimos);
+				emprestimoService.visualizar(emprestimos);
 				break;
 			case '0':
 				break;
@@ -65,6 +61,7 @@ public class Menu {
 
 	}
 
+	@Override
 	public void menuLivro(){
 		System.out.println("");
 		char escolha;
@@ -84,13 +81,13 @@ public class Menu {
 			}
 			switch (escolha) {
 				case '1':
-					livroService.cadastroLivro(biblioteca);
+					livroService.cadastro(biblioteca);
 					break;
 				case '2':
 					livroService.excluirLivro(biblioteca);
 					break;
 				case '3':
-					livroService.visualizarLivro(biblioteca);
+					livroService.visualizar(biblioteca);
 					break;
 				case '0':
 					break;
@@ -102,6 +99,7 @@ public class Menu {
 		} while (escolha != '0');
 	}
 
+	@Override
 	public void menuUsuario(){
 		char escolha;
 		System.out.println("");
@@ -121,13 +119,13 @@ public class Menu {
 			}
 			switch (escolha) {
 				case '1':
-					userService.cadastroUser(listaUser);
+					userService.cadastro(listaUser);
 					break;
 				case '2':
 					userService.excluirUser(listaUser);
 					break;
 				case '3':
-					userService.visualizarUser(listaUser);
+					userService.visualizar(listaUser);
 					break;
 				case '0':
 					break;
@@ -139,6 +137,7 @@ public class Menu {
 		} while (escolha != '0');
 	}
 
+	@Override
 	public void OpcaoMenu() {
 		Livro l1 = new Livro("O desaparecimento de Alice Norman", "Ólavo Meia-lua", "TS Livros",
 				"157-24-854-4152-8","Mistério | Drama", 2018, 14);

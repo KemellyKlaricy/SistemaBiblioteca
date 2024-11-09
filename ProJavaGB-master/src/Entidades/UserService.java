@@ -2,12 +2,13 @@ package Entidades;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserService {
+public class UserService extends Service {
 
     Scanner entradaInt = new Scanner(System.in);
     Scanner entradaSt = new Scanner(System.in);
 
-    public void cadastroUser(ArrayList<User> listaUser){
+
+    public void cadastro(ArrayList<User> listaUser){
         System.out.println("Informe o nome do Usuário a ser cadastrado: ");
         String nomeaux = entradaSt.nextLine();
 
@@ -52,7 +53,7 @@ public class UserService {
         }
         System.out.println("Usuário não encontrado!");
     }
-    public void visualizarUser(ArrayList<User> listaUser){
+    public void visualizar(ArrayList<User> listaUser){
         System.out.println("Informe o ID do usuário que deseja visualizar: ");
         int idTemp = entradaInt.nextInt();
         for(User user: listaUser){

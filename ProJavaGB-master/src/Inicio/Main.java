@@ -2,9 +2,9 @@ package Inicio;
 
 public class Main {
 	public static void main(String[] args) {
-		Menu menu = new Menu();
+		Bibliotecario bibliotecario = new Bibliotecario();
 		
-		menu.OpcaoMenu();
+		bibliotecario.OpcaoMenu();
 		
 	}
 }
