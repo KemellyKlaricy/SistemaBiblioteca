@@ -8,6 +8,7 @@ public abstract class Service {
         return true;
     }
     void cadastro(){}
+    void excluir(){}
     void visualizar(){}
 
 }

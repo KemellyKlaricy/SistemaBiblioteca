@@ -84,7 +84,7 @@ public class Bibliotecario implements Menu {
 					livroService.cadastro(biblioteca);
 					break;
 				case '2':
-					livroService.excluirLivro(biblioteca);
+					livroService.excluir(biblioteca);
 					break;
 				case '3':
 					livroService.visualizar(biblioteca);
@@ -122,7 +122,7 @@ public class Bibliotecario implements Menu {
 					userService.cadastro(listaUser);
 					break;
 				case '2':
-					userService.excluirUser(listaUser);
+					userService.excluir(listaUser);
 					break;
 				case '3':
 					userService.visualizar(listaUser);
@@ -140,11 +140,17 @@ public class Bibliotecario implements Menu {
 	@Override
 	public void OpcaoMenu() {
 		Livro l1 = new Livro("O desaparecimento de Alice Norman", "Ólavo Meia-lua", "TS Livros",
-				"157-24-854-4152-8","Mistério | Drama", 2018, 14);
+				"1","Mistério | Drama", 2018, 14);
 		Livro l2 = new Livro("Os quatro filhos", "Larissa de Oliveira", "TS Livros",
-				"178-24-157-5893-7","Horror | Drama | Sobrenatural", 2005, 8);
+				"2","Horror | Drama | Sobrenatural", 2005, 8);
+		User u1 = new User("Ikaro Oliveira", "835.478.965-00", 18,"Rua das Castanheiras 14|24",
+				"Kzinho@gmail.com", "+55 (83) 99654-1287", 1);
+		User u2 = new User("Luana Patos", "715.354.324-83", 25,"Lagoa de Deus 22|16",
+				"LPatos@gmail.com", "+55 (83) 99614-7824", 2);
 		biblioteca.add(l1);
 		biblioteca.add(l2);
+		listaUser.add(u1);
+		listaUser.add(u2);
 
 		System.out.println("====== Menu Inicial =====");
 

@@ -18,8 +18,8 @@ public class User extends Pessoa{
 
     Scanner entradaInt = new Scanner(System.in);
 
-    User(){}
-    User(String nome, String cpf, int idade,String endereco, String email, String telefone, int id){
+    public User(){}
+    public User(String nome, String cpf, int idade,String endereco, String email, String telefone, int id){
         super(nome, cpf, idade);
         this.endereco = endereco;
         this.email = email;

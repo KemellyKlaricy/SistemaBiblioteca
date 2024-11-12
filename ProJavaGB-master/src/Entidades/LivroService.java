@@ -33,7 +33,7 @@ public class LivroService extends Service{
         biblioteca.add(livro);
     }
     
-    public void excluirLivro(ArrayList<Livro> biblioteca){
+    public void excluir(ArrayList<Livro> biblioteca){
         System.out.println("Informe o ISBN do livro que deseja deletar: ");
         String idTemp = entradaSt.nextLine();
         
@@ -46,7 +46,6 @@ public class LivroService extends Service{
         }
         System.out.println("Livro não encontrado!");
     }
-
 
     public void visualizar(ArrayList<Livro> biblioteca){
         System.out.println("Informe o ISBN do livro que deseja visualizar: ");

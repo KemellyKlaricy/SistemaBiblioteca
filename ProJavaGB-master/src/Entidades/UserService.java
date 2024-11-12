@@ -40,7 +40,7 @@ public class UserService extends Service {
         }
 
     }
-    public void excluirUser(ArrayList<User> listaUser){
+    public void excluir(ArrayList<User> listaUser){
         System.out.println("Informe o ID do usuário que deseja editadar: ");
         int idTemp = entradaInt.nextInt();
         for(User user: listaUser){
