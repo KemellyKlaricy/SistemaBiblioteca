@@ -7,7 +7,6 @@ public class UserService extends Service {
     Scanner entradaInt = new Scanner(System.in);
     Scanner entradaSt = new Scanner(System.in);
 
-
     public void cadastro(ArrayList<User> listaUser){
         System.out.println("Informe o nome do Usuário a ser cadastrado: ");
         String nomeaux = entradaSt.nextLine();
@@ -62,10 +61,11 @@ public class UserService extends Service {
                 System.out.println("_______________________________________________");
                 System.out.printf("Nome: %s\n" +
                        "Idade: %d\n" +
+                        "CPF: %s\n" +
                        "ID: %d\n" +
                        "Telefone: %s\n" +
                        "Email: %s\n" +
-                       "Endereço: %s", user.nome, user.idade, user.ID, user.telefone, user.email, user.endereco);
+                       "Endereço: %s", user.nome, user.idade,user.cpf, user.ID, user.telefone, user.email, user.endereco);
                 String status;
                 System.out.println("\nEmprestimos Registrados.");
                 for(int i = 0; i < 3; i++){

@@ -1,22 +1,16 @@
 package Entidades;
 
-import java.util.Scanner;
-
 public class User extends Pessoa{
 
-    String endereco = new String();
+    protected String endereco = new String();
 
-    String email = new String();
+    protected String email = new String();
 
-    String telefone = new String();
+    protected String telefone = new String();
 
-    int ID;
+    protected int ID;
 
-    Emprestimo[] historicoEmprestimo = new Emprestimo[3];
-
-    Scanner entradaSt = new Scanner(System.in);
-
-    Scanner entradaInt = new Scanner(System.in);
+    protected Emprestimo[] historicoEmprestimo = new Emprestimo[3];
 
     public User(){}
     public User(String nome, String cpf, int idade,String endereco, String email, String telefone, int id){

@@ -1,14 +1,14 @@
 package Entidades;
-import java.util.Scanner;
+
 
 public class Livro {
-    String titulo;
-    String autor;
-    String editora;
-    String isbn;
-    String genero;
-    int anoPublicacao;
-    int quantidadeDisponivel;
+    protected String titulo;
+    protected String autor;
+    protected  String editora;
+    protected  String isbn;
+    protected String genero;
+    protected int anoPublicacao;
+    protected int quantidadeDisponivel;
 
     Livro(){}
     public Livro(String titulo, String autor, String editora, String isbn, String genero, int anopublicacao, int estoque){

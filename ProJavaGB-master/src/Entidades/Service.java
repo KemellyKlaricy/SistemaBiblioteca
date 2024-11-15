@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Service {
 
-    boolean verificacao(){
+    protected boolean verificacao(ArrayList<User> listaUser, String isbn, int id){
         return true;
     }
-    void cadastro(){}
-    void excluir(){}
-    void visualizar(){}
+    protected void cadastro(){}
+    protected void excluir(){}
+    protected void visualizar(){}
 
 }

@@ -8,7 +8,7 @@ public class EmprestimoService extends Service {
     Scanner entradaInt = new Scanner(System.in);
     Scanner entradaSt = new Scanner(System.in);
 
-
+    @Override
     public boolean verificacao(ArrayList<User> listaUser, String isbn, int id){
         for(User user: listaUser){
             if(user.ID == id){

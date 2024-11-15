@@ -6,6 +6,8 @@ public class LivroService extends Service{
 	
     Scanner entradaSt = new Scanner(System.in);
     Scanner entradaInt = new Scanner(System.in);
+
+
     public void cadastro(ArrayList<Livro> biblioteca){
 
         System.out.println("Informe o Titulo do livro a ser registrado: ");
@@ -20,7 +22,7 @@ public class LivroService extends Service{
         System.out.println("Informe a Editora: ");
         String editora = entradaSt.nextLine();
 
-        System.out.println("Informe o ISBN: xxx-xx-xxx-xxxx-x");
+        System.out.println("Informe o ISBN: ");
         String isbn = entradaSt.nextLine();
 
         System.out.println("Informe o Ano de publicação: ");
