@@ -12,7 +12,7 @@ public class User extends Pessoa{
 
     protected Emprestimo[] historicoEmprestimo = new Emprestimo[3];
 
-    public User(){}
+    private User(){}
     public User(String nome, String cpf, int idade,String endereco, String email, String telefone, int id){
         super(nome, cpf, idade);
         this.endereco = endereco;

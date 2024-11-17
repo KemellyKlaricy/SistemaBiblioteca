@@ -5,8 +5,9 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class EmprestimoService extends Service {
-    Scanner entradaInt = new Scanner(System.in);
-    Scanner entradaSt = new Scanner(System.in);
+    //Classes Scanner como Private
+    private Scanner entradaInt = new Scanner(System.in);
+    private Scanner entradaSt = new Scanner(System.in);
 
     @Override
     public boolean verificacao(ArrayList<User> listaUser, String isbn, int id){

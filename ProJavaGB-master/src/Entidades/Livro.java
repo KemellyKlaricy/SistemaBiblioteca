@@ -4,8 +4,8 @@ package Entidades;
 public class Livro {
     protected String titulo;
     protected String autor;
-    protected  String editora;
-    protected  String isbn;
+    protected String editora;
+    protected String isbn;
     protected String genero;
     protected int anoPublicacao;
     protected int quantidadeDisponivel;

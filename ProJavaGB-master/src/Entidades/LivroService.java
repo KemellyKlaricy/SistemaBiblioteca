@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class LivroService extends Service{
 	
-    Scanner entradaSt = new Scanner(System.in);
-    Scanner entradaInt = new Scanner(System.in);
+    private Scanner entradaSt = new Scanner(System.in);
+    private Scanner entradaInt = new Scanner(System.in);
 
 
     public void cadastro(ArrayList<Livro> biblioteca){

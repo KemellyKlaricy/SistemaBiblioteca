@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 public class UserService extends Service {
 
-    Scanner entradaInt = new Scanner(System.in);
-    Scanner entradaSt = new Scanner(System.in);
+    //Adicionado o atributo Private.
+    private Scanner entradaInt = new Scanner(System.in);
+    private Scanner entradaSt = new Scanner(System.in);
 
     public void cadastro(ArrayList<User> listaUser){
         System.out.println("Informe o nome do Usuário a ser cadastrado: ");
