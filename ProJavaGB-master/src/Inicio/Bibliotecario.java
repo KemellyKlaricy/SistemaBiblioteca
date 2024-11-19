@@ -53,7 +53,7 @@ public class Bibliotecario implements Menu {
 			case '0':
 				break;
 			default:
-				System.out.println("Opção inválida. Tente novamente.");
+				System.out.println("Opção inválida!! Tente novamente.");
 				break;
 		}
 		pause();

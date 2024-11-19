@@ -5,21 +5,18 @@ import java.util.Scanner;
 import java.time.LocalDate;
 
 public class EmprestimoService extends Service {
-    //Classes Scanner como Private
-    private Scanner entradaInt = new Scanner(System.in);
-    private Scanner entradaSt = new Scanner(System.in);
+
+    private Scanner entrada = new Scanner(System.in);
 
     @Override
-    public boolean verificacao(ArrayList<User> listaUser, String isbn, int id){
-        for(User user: listaUser){
-            if(user.ID == id){
-                for(int i = 0; i < 3; i++){
-                    if(user.historicoEmprestimo[i] != null){
-                        if(user.historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(isbn)){
-                            System.out.println("O emprestimo não pode ser concluido," +
-                                    " pois o usuario já retem um livro com este ISBN!");
-                            return false;
-                        }
+    public boolean verificacao(ArrayList<User> listaUser, String isbn, int id) {
+        for (User user : listaUser) {
+            if (user.getId() == id) {
+                for (int i = 0; i < user.getHistoricoEmprestimo().length; i++) {
+                    Emprestimo emprestimo = user.getHistoricoEmprestimo()[i];
+                    if (emprestimo != null && emprestimo.getLivro().getIsbn().equalsIgnoreCase(isbn)) {
+                        System.out.println("O empréstimo não pode ser concluído, pois o usuário já possui um livro com este ISBN!");
+                        return false;
                     }
                 }
             }
@@ -29,25 +26,24 @@ public class EmprestimoService extends Service {
 
     public void registroEmprestimo(ArrayList<User> listaUser, ArrayList<Livro> biblioteca, ArrayList<Emprestimo> emprestimos) {
         System.out.println("Informe o ISBN do livro para registrar o empréstimo: ");
-        String isbnaux = entradaSt.nextLine();
+        String isbnaux = entrada.nextLine();
 
         System.out.println("Informe o ID do usuário para registrar o empréstimo: ");
-        int idaux = entradaInt.nextInt();
-        entradaSt.nextLine();
-
+        int idaux = entrada.nextInt();
+        entrada.nextLine();
 
         Livro livro = null;
         User usuario = null;
 
         for (Livro livro1 : biblioteca) {
-            if (livro1.isbn.equals(isbnaux)) {
+            if (livro1.getIsbn().equals(isbnaux)) {
                 livro = livro1;
                 break;
             }
         }
 
         for (User user : listaUser) {
-            if (user.ID == idaux) {
+            if (user.getId() == idaux) {
                 usuario = user;
                 break;
             }
@@ -63,51 +59,40 @@ public class EmprestimoService extends Service {
             return;
         }
 
-
-        if (livro.quantidadeDisponivel <= 0) {
+        if (livro.getQuantidadeDisponivel() <= 0) {
             System.out.println("Nenhum exemplar disponível.");
             return;
         }
-
 
         if (!verificacao(listaUser, isbnaux, idaux)) {
             return;
         }
 
-        for(User aux: listaUser){
-            int cont = 0;
-            if(aux.ID == idaux){
-                for(int i = 0; i < 3; i++){
-                    if(aux.historicoEmprestimo[i] != null){
-                        cont++;
-                    }
-                    if(cont == 3){
-                        System.out.println("O usuário atingiu o limite de empréstimos!");
-                        return;
-                    }
-                }
+        int cont = 0;
+        for (Emprestimo emprestimo : usuario.getHistoricoEmprestimo()) {
+            if (emprestimo != null) {
+                cont++;
             }
         }
 
+        if (cont >= 3) {
+            System.out.println("O usuário atingiu o limite de empréstimos!");
+            return;
+        }
+
         Emprestimo novoEmprestimo = new Emprestimo();
-        novoEmprestimo.usuario = usuario;
-        novoEmprestimo.livro = livro;
-        novoEmprestimo.dataEmprestimo = LocalDate.now();
-        novoEmprestimo.dataDevolucao = LocalDate.now().plusMonths(1);
-        novoEmprestimo.devolvido = false;
+        novoEmprestimo.setUsuario(usuario);
+        novoEmprestimo.setLivro(livro);
+        novoEmprestimo.setDataEmprestimo(LocalDate.now());
+        novoEmprestimo.setDataDevolucao(LocalDate.now().plusMonths(1));
+        novoEmprestimo.setDevolvido(false);
 
         emprestimos.add(novoEmprestimo);
-        livro.quantidadeDisponivel--;
+        livro.setQuantidadeDisponivel(livro.getQuantidadeDisponivel() - 1);
 
-
-        for (User user : listaUser) {
-            if (user.ID == idaux) {
-                for (int i = 0; i < 3; i++) {
-                    if (user.historicoEmprestimo[i] == null) {
-                        user.historicoEmprestimo[i] = novoEmprestimo;
-                        break;
-                    }
-                }
+        for (int i = 0; i < usuario.getHistoricoEmprestimo().length; i++) {
+            if (usuario.getHistoricoEmprestimo()[i] == null) {
+                usuario.getHistoricoEmprestimo()[i] = novoEmprestimo;
                 break;
             }
         }
@@ -115,48 +100,55 @@ public class EmprestimoService extends Service {
         System.out.println("Empréstimo registrado com sucesso!");
     }
 
-    public void visualizar(ArrayList<Emprestimo> emprestimos){
-        String status;
-        System.out.println("Informe o ID do usuario para verificar o status de emprestimo: ");
-        int auxID = entradaInt.nextInt();
+    public void visualizar(ArrayList<Emprestimo> emprestimos) {
+        System.out.println("Informe o ID do usuário para verificar o status de empréstimo: ");
+        int auxID = entrada.nextInt();
+        entrada.nextLine();
 
-        System.out.println("Informe o ISBN do livro para verificar o status de emprestimo: ");
-        String auxISBN = entradaSt.nextLine();
+        System.out.println("Informe o ISBN do livro para verificar o status de empréstimo: ");
+        String auxISBN = entrada.nextLine();
 
-        for(Emprestimo auxEmprestimo: emprestimos){
-            if(auxEmprestimo.usuario.ID == auxID && auxEmprestimo.livro.isbn.equalsIgnoreCase(auxISBN)){
-                if(auxEmprestimo.devolvido == true){
-                    status = "Devolvido";
-                }else{
-                    status = "Encaminhado";
-                }
-                System.out.println("Nome: " + auxEmprestimo.usuario.nome + "\nLivro: " + auxEmprestimo.livro.titulo
-                        + "\nData de emprestimo: " + auxEmprestimo.dataEmprestimo + "\nData de devolução: "
-                        + auxEmprestimo.dataDevolucao + "\nStatus: " + status);
+        for (Emprestimo auxEmprestimo : emprestimos) {
+            if (auxEmprestimo.getUsuario().getId() == auxID &&
+                    auxEmprestimo.getLivro().getIsbn().equalsIgnoreCase(auxISBN)) {
+
+                String status = auxEmprestimo.isDevolvido() ? "Devolvido" : "Encaminhado";
+
+                System.out.println("_______________________________________________");
+                System.out.printf("Nome: %s\nLivro: %s\nData de empréstimo: %s\nData de devolução: %s\nStatus: %s\n",
+                        auxEmprestimo.getUsuario().getNome(), auxEmprestimo.getLivro().getTitulo(),
+                        auxEmprestimo.getDataEmprestimo(), auxEmprestimo.getDataDevolucao(), status);
+                System.out.println("_______________________________________________");
+                return;
             }
         }
-
+        System.out.println("Empréstimo não encontrado.");
     }
 
     public void registroDevolucao(ArrayList<Emprestimo> emprestimos) {
         System.out.println("Informe o ID do usuário para registrar a devolução: ");
-        int auxID = entradaInt.nextInt();
+        int auxID = entrada.nextInt();
+        entrada.nextLine();
 
         System.out.println("Informe o ISBN do livro para registrar a devolução: ");
-        String auxISBN = entradaSt.nextLine();
+        String auxISBN = entrada.nextLine();
 
         boolean encontrado = false;
         for (Emprestimo emprestimo : emprestimos) {
-            if (emprestimo.usuario.ID == auxID && emprestimo.livro.isbn.equalsIgnoreCase(auxISBN)) {
-                emprestimo.devolvido = true;
-                emprestimo.livro.quantidadeDisponivel++;
+            if (emprestimo.getUsuario().getId() == auxID &&
+                    emprestimo.getLivro().getIsbn().equalsIgnoreCase(auxISBN)) {
+
+                emprestimo.setDevolvido(true);
+                emprestimo.getLivro().setQuantidadeDisponivel(emprestimo.getLivro().getQuantidadeDisponivel() + 1);
                 System.out.println("Devolução registrada com sucesso!");
                 encontrado = true;
-                for(int i = 0; i < 3; i++){
-                    if(emprestimo.usuario.historicoEmprestimo[i] != null){
-                        if(emprestimo.usuario.historicoEmprestimo[i].livro.isbn.equalsIgnoreCase(auxISBN)){
-                            emprestimo.usuario.historicoEmprestimo[i] = null;
-                        }
+
+                for (int i = 0; i < emprestimo.getUsuario().getHistoricoEmprestimo().length; i++) {
+                    if (emprestimo.getUsuario().getHistoricoEmprestimo()[i] != null &&
+                            emprestimo.getUsuario().getHistoricoEmprestimo()[i].getLivro().getIsbn().equalsIgnoreCase(auxISBN)) {
+
+                        emprestimo.getUsuario().getHistoricoEmprestimo()[i] = null;
+                        break;
                     }
                 }
                 break;
